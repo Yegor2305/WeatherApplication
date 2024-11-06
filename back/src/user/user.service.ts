@@ -1,10 +1,8 @@
 import {BadRequestException, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
-import {UUID} from "crypto";
 import {User} from "./entities/user.entity";
 import {ConfigService} from "@nestjs/config";
 
@@ -30,12 +28,8 @@ export class UserService {
     return { newUser };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findOne(username: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: {username} });
   }
 
   remove(id: number) {

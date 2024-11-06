@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
 import { UserModule } from './user/user.module';
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {User} from "./user/entities/user.entity";
-import {APP_GUARD} from "@nestjs/core";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -27,6 +24,7 @@ import {APP_GUARD} from "@nestjs/core";
           inject: [ConfigService],
       }),
       UserModule,
+      AuthModule,
   ],
   controllers: [AppController],
   providers: [
