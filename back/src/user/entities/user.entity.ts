@@ -1,5 +1,5 @@
-import {UUID} from 'crypto'
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Place} from "../../place/entities/place.entity";
 
 @Entity()
 export class User {
@@ -11,4 +11,8 @@ export class User {
 
     @Column()
     password: string;
+
+    @ManyToMany(() => Place, (place) => place.users)
+    @JoinTable()
+    places: Place[];
 }
