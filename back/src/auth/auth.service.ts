@@ -48,7 +48,9 @@ export class AuthService {
             username: userDto.username,
             password: await bcrypt.hash(userDto.password, salt)
         });
-
-        return { access_token: this.jwtService.sign({ id: newUser.id, username: newUser.username }) };
+        return {
+            id: newUser.id,
+            username: newUser.username,
+            access_token: this.jwtService.sign({ id: newUser.id, username: newUser.username }) };
     }
 }
