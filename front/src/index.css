@@ -6,6 +6,7 @@ body{
     width: 100%;
     min-height: 100vh;
     background: var(--third-color);
+    overflow: hidden;
 }
 
 header{
@@ -39,6 +40,10 @@ header{
 
 .max-height{
     height: 100vh;
+}
+
+.max-width{
+    width: 100%;
 }
 
 .flex{
@@ -75,6 +80,10 @@ header{
 
 .mt-20px{
     margin-top: 20px
+}
+
+.m-zero{
+    margin: 0;
 }
 
 .to-center-content{

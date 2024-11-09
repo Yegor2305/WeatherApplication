@@ -14,7 +14,7 @@ export class WeatherService {
         private readonly httpService: HttpService,
         private readonly configService: ConfigService,
     ){
-        this.weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+        this.weatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
         this.weatherApiKey = this.configService.get<string>('OPEN_WEATHER_API_KEY');
         this.ipfyUrl = 'https://api.ipify.org?format=json';
         this.ipApiUrl = 'http://ip-api.com/json';
@@ -28,6 +28,7 @@ export class WeatherService {
         const weatherResponse = await firstValueFrom(this.httpService.get(this.weatherApiUrl, {
             params: {
                 q: location.data.city,
+                cnt: 9,
                 appid: this.weatherApiKey,
                 units: 'metric',
             }
@@ -41,6 +42,7 @@ export class WeatherService {
             const weatherResponse = await firstValueFrom(this.httpService.get(this.weatherApiUrl, {
                 params: {
                     q: city,
+                    cnt: 9,
                     appid: this.weatherApiKey,
                     units: 'metric',
                 }

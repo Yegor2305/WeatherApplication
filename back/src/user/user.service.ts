@@ -13,6 +13,11 @@ export class UserService {
       @InjectRepository(Place) private readonly placeRepository: Repository<Place>,
   ) {}
 
+  async getUserPlaces(userId: number){
+    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['places'] });
+    return user.places;
+  }
+
   async addPlaceToUser(userId: number, placeDto: AddPlaceDto) {
     const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['places'] });
     let place = await this.placeRepository.findOne({ where: { name: placeDto.name } });
