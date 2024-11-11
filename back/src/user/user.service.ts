@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import {User} from "./entities/user.entity";
 import {Place} from "../place/entities/place.entity";
 import {AddPlaceDto} from "../place/dto/add-place.dto";
-import {RemovePlaceDto} from "../place/dto/remove-place.dto";
 
 @Injectable()
 export class UserService {
@@ -46,12 +45,12 @@ export class UserService {
     throw new BadRequestException('Adding place go wrong');
   }
 
-  async removePlaceFromUser(userId: number, placeDto: RemovePlaceDto) {
+  async removePlaceFromUser(userId: number, placeName : string) {
     const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['places'] });
 
     if (user){
 
-      const placeIndex = user.places.findIndex(ePlace => ePlace.id === placeDto.id)
+      const placeIndex = user.places.findIndex(ePlace => ePlace.name === placeName)
 
       if (placeIndex === -1){
         throw new NotFoundException('The user does not have such a place');

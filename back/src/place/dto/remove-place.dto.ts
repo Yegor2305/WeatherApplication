@@ -1,7 +1,6 @@
-import {IsInt, Min} from "class-validator";
+import {IsNotEmpty} from "class-validator";
 
 export class RemovePlaceDto {
-    @IsInt()
-    @Min(1)
-    id: number;
+    @IsNotEmpty()
+    name: string;
 }

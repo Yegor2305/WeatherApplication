@@ -4,6 +4,7 @@ import Error from "../pages/error.tsx";
 import Home from "../pages/home.tsx";
 import Favorites from "../pages/favorites.tsx";
 import Auth from "../pages/auth.tsx";
+import ProtectedRoute from "../components/protectedRoute.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -13,11 +14,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home/>,
+                element: <ProtectedRoute>
+                    <Home/>
+                </ProtectedRoute>,
             },
             {
                 path: 'favorites',
-                element: <Favorites/>,
+                element: <ProtectedRoute>
+                    <Favorites/>
+                </ProtectedRoute>,
             },
             {
                 path: 'auth',

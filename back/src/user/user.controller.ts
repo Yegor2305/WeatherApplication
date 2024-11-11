@@ -1,8 +1,7 @@
-import {Controller, Post, Body, Delete, UsePipes, ValidationPipe, UseGuards, Request, Get} from '@nestjs/common';
+import {Controller, Post, Body, Delete, UsePipes, ValidationPipe, UseGuards, Request, Get, Param} from '@nestjs/common';
 import { UserService } from './user.service';
 import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 import {AddPlaceDto} from "../place/dto/add-place.dto";
-import {RemovePlaceDto} from "../place/dto/remove-place.dto";
 
 @Controller('user')
 export class UserController {
@@ -21,10 +20,9 @@ export class UserController {
     return this.userService.addPlaceToUser(req.user.id, place);
   }
 
-  @Delete('remove-place')
+  @Delete('remove-place/:place_name')
   @UseGuards(JwtAuthGuard)
-  @UsePipes(new ValidationPipe())
-  remove(@Request() req, @Body() place: RemovePlaceDto) {
-    return this.userService.removePlaceFromUser(req.user.id, place);
+  remove(@Request() req, @Param('place_name') placeName: string) {
+    return this.userService.removePlaceFromUser(req.user.id, placeName);
   }
 }

@@ -6,7 +6,8 @@ export const WeatherService = {
         const {data} = await instanceGeneral.get<IWeatherData>("/weather");
         return data;
     },
-    async getWeatherByCity(city : string) : Promise<IWeatherData> {
+    async getWeatherByCity(city : string | null) : Promise<IWeatherData | null> {
+        if (!city) return null;
         const {data} = await instanceGeneral.get<IWeatherData>(`/weather/city/${city}`);
         return data;
     }

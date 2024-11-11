@@ -70,17 +70,32 @@ export interface IWeatherData{
     city: ICity;
 }
 
-export interface ICitiesListProps{
-    cities: string[];
-    onCitySelect: (city: string) => void;
-}
-
 export interface IWeatherDisplayProps{
-    city: string;
-    localStorageUpdated: boolean;
-    onLocalStorageUpdated: (localStorageUpdated: boolean) => void;
+    index: number;
+    city: string | null;
+    setCity?: (id: number, city: string | null) => Promise<void>;
+    removeCard?: (id: number) => void;
+    cities?: string[];
+    weatherData: IWeatherData | null;
+    favorite: boolean;
+    favoriteChange: (id: number) => Promise<void>;
 }
 
 export interface IHourlyForecastProps{
-    localStorageUpdated: boolean;
+    weatherData: IWeatherData | null;
+}
+
+export interface IWeatherCard{
+    city: string | null;
+    weatherData: IWeatherData | null;
+    favorite: boolean;
+}
+
+export interface IPlaceInfo{
+    id: number;
+    name: string;
+}
+
+export interface IPlace{
+    name: string;
 }
